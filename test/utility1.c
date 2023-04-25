@@ -101,25 +101,32 @@ int _printf(char *format, ...)
 	va_list args;
 	int fi, pcc;
 
-	pcc = 0;
-	va_start(args, format);
-	for (fi = 0; *(format + fi) != '\0'; fi++)
+	if (*format)
 	{
-		if (format[fi] == '%')
+		pcc = 0;
+		va_start(args, format);
+		for (fi = 0; *(format + fi) != '\0'; fi++)
 		{
-			runFSSubroutine(format, &fi, &pcc, args);
-		}
-		else if (format[fi] == '\\')
-		{
-			runESSubroutine(format, &fi, &pcc);
-		}
-		else
-		{
-			_putchar(format[fi]);
-			pcc++;
-		}
+			if (format[fi] == '%')
+			{
+				runFSSubroutine(format, &fi, &pcc, args);
+			}
+			else if (format[fi] == '\\')
+			{
+				runESSubroutine(format, &fi, &pcc);
+			}
+			else
+			{
+				_putchar(format[fi]);
+				if (pcc != -1)
+					pcc++;
+			}
 
+		}
+		if (*(format + fi - 1) == '\\' || *(format + fi - 1) == '%')
+			pcc = -1;
+		va_end(args);
+		return (pcc);
 	}
-	va_end(args);
-	return (pcc);
+	return (-1);
 }

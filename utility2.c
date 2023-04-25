@@ -10,7 +10,8 @@
 void printCharacter(int *pcc, va_list args)
 {
 	_putchar(va_arg(args, int));
-	*pcc = *pcc + 1;
+	if (*pcc != -1)
+		*pcc = *pcc + 1;
 }
 
 /**
@@ -24,10 +25,17 @@ void printString(int *pcc, va_list args)
 {
 	char *sval;
 
-	for (sval = va_arg(args, char*); *sval; sval++)
+	sval = va_args(args, char*);
+	if (sval == null)
+		*pcc = -1;
+	else
 	{
-		_putchar(*sval);
-		*pcc = *pcc + 1;
+		for (; *sval; sval++)
+		{
+			_putchar(*sval);
+			if (*pcc != -1)
+				*pcc = *pcc + 1;
+		}
 	}
 }
 
@@ -40,7 +48,8 @@ void printString(int *pcc, va_list args)
 void printPercentage(int *pcc)
 {
 	_putchar('%');
-	*pcc = *pcc + 1;
+	if (*pcc != -1)
+		*pcc = *pcc + 1;
 }
 
 /**
@@ -56,7 +65,8 @@ void printDefault(char *format, int *fi, int *pcc)
 {
 	_putchar('%');
 	_putchar(format[*fi]);
-	*pcc = *pcc + 2;
+	if (*pcc != -1)
+		*pcc = *pcc + 2;
 }
 
 /**
@@ -80,12 +90,14 @@ void printInteger(int *pcc, va_list args)
 	if (sign == -1)
 	{
 		_putchar('-');
-		*pcc = *pcc + 1;
+		if (*pcc != -1)
+			*pcc = *pcc + 1;
 	}
 	while (mag != 0)
 	{
 		_putchar('0' + (value / mag));
-		*pcc = *pcc + 1;
+		if (*pcc != -1)
+			*pcc = *pcc + 1;
 		value = value % mag;
 		mag /= 10;
 	}
