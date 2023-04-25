@@ -6,7 +6,7 @@
 /**
  * struct operation - Struct operation
  *
- * @op: The operator
+ * @op: The operator 
  * @func: The associated function
  *
  */
@@ -32,4 +32,5 @@ void printPercentage(int *pcc);
 void printInteger(int *pcc, va_list args);
 void printEscapeCharacter(char *format, int *fi, int *pcc);
 void printDefault(char *format, int *fi, int *pcc);
+void printBinary(int *pcc, va_list args);
 #endif /** MAIN_H  **/

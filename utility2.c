@@ -26,7 +26,7 @@ void printString(int *pcc, va_list args)
 	char *sval;
 
 	sval = va_arg(args, char*);
-	if (sval == NULL)
+	if (!sval)
 		*pcc = -1;
 	else
 	{

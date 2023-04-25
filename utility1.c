@@ -70,6 +70,14 @@ void runFSSubroutine(char *format, int *fi, int *pcc, va_list args)
 	specifier = format[*fi];
 	switch (specifier)
 	{
+		case '\0':
+			*fi = *fi - 1;
+			*pcc = -1;
+			break;
+		case '\\':
+			*fi = *fi - 1;
+			*pcc = -1;
+			break;
 		case '%':
 			printPercentage(pcc);
 			break;
@@ -84,6 +92,9 @@ void runFSSubroutine(char *format, int *fi, int *pcc, va_list args)
 			break;
 		case 'i':
 			printInteger(pcc, args);
+			break;
+		case 'b':
+			printBinary(pcc, args);
 			break;
 		default:
 			printDefault(format, fi, pcc);
@@ -123,8 +134,6 @@ int _printf(char *format, ...)
 			}
 
 		}
-		if (*(format + fi - 1) == '\\' || *(format + fi - 1) == '%')
-			pcc = -1;
 		va_end(args);
 		return (pcc);
 	}

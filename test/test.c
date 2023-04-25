@@ -33,5 +33,9 @@ int main(void)
 	printf("\n");
 	_printf("printf(i): %i, %i, %i, %i, %i", 10, 200, 300, 4567, -90054);
 	printf("\n");
+	_i = _printf("Goat Works Test%");
+	printf("%d\n", _i);
+	_printf("Testing binary of 20 = %b",20);
+	_putchar('\n');
 	return (0);
 }
