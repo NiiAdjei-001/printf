@@ -25,8 +25,8 @@ void printString(int *pcc, va_list args)
 {
 	char *sval;
 
-	sval = va_args(args, char*);
-	if (sval == null)
+	sval = va_arg(args, char*);
+	if (sval == NULL)
 		*pcc = -1;
 	else
 	{
